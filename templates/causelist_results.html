@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Cause List Results - eCourts Listing Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #667eea; margin-bottom: 20px;">📋 Cause List - Court {{ court_id }}</h2>
+
+    {% if causelists %}
+        {% for causelist in causelists %}
+        <div style="background: white; border: 2px solid #667eea; border-radius: 12px; padding: 20px; margin-bottom: 30px;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="margin: 0;">📅 {{ causelist.date }}</h3>
+                <p style="margin: 5px 0 0 0; opacity: 0.9;">{{ causelist.court_name }}</p>
+            </div>
+
+            {% if causelist.cases %}
+                <div class="alert alert-success">
+                    <strong>{{ causelist.cases|length }}</strong> case(s) listed for this date
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">S.No</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">CNR</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">Case No</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">Parties</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">Advocate</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #667eea;">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for case in causelist.cases %}
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td style="padding: 12px;">
+                                    <span style="background: #667eea; color: white; padding: 4px 10px; border-radius: 12px; font-weight: 600;">
+                                        {{ case.serial_no or case.sl_no or case.sr_no or loop.index }}
+                                    </span>
+                                </td>
+                                <td style="padding: 12px; font-family: monospace; font-size: 12px;">
+                                    {{ case.cnr or case.CNR or 'N/A' }}
+                                </td>
+                                <td style="padding: 12px; font-weight: 600;">
+                                    {{ case.case_no or case.case_number or case.caseno or 'N/A' }}
+                                </td>
+                                <td style="padding: 12px;">
+                                    {{ case.party_names or case.parties or 'N/A' }}
+                                </td>
+                                <td style="padding: 12px;">
+                                    {{ case.advocate or 'N/A' }}
+                                </td>
+                                <td style="padding: 12px;">
+                                    {{ case.purpose or 'N/A' }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <strong>⚠️ No Cases Listed</strong><br>
+                    No cases are listed for this court on {{ causelist.date }}
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning">
+            <strong>⚠️ No Data Available</strong><br>
+            Could not retrieve cause list data. Please check the court ID and try again.
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 30px; display: flex; gap: 15px;">
+        <a href="/causelist" class="btn" style="text-decoration: none; text-align: center; display: block;">
+            📋 New Query
+        </a>
+        <a href="/" class="btn btn-secondary" style="text-decoration: none; text-align: center; display: block;">
+            🔍 Search Case
+        </a>
+    </div>
+</div>
+{% endblock %}

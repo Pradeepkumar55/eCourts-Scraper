@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCourts Test Data - Quick Reference</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .test-case {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+        .test-case h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .field-group {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .field-label {
+            font-weight: 600;
+            color: #555;
+        }
+        .field-value {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            font-weight: 600;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .field-value:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        .result-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .cnr-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .cnr-item {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+        .cnr-item strong {
+            display: block;
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        .cnr-item small {
+            color: #666;
+            font-size: 13px;
+        }
+        .quick-copy {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .quick-copy button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        .quick-copy button:hover {
+            transform: scale(1.05);
+        }
+        .tooltip {
+            position: fixed;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
+            z-index: 1000;
+        }
+        @media (max-width: 768px) {
+            .field-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚖️ eCourts Test Data Reference</h1>
+            <p>Click any value to copy it to clipboard</p>
+        </div>
+
+        <div class="card">
+            <h2>🎯 Quick Test Cases</h2>
+            
+            <div class="test-case">
+                <h3>Test 1: Basic Search by CNR</h3>
+                <div class="field-group">
+                    <span class="field-label">CNR Number:</span>
+                    <div class="field-value" onclick="copyToClipboard('ABCD1234567890123', this)">ABCD1234567890123</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Court ID:</span>
+                    <div class="field-value" onclick="copyToClipboard('101', this)">101</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">When:</span>
+                    <div class="field-value" onclick="copyToClipboard('Today', this)">Today</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">State (Optional):</span>
+                    <div class="field-value" onclick="copyToClipboard('Andhra Pradesh', this)">Andhra Pradesh</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">District (Optional):</span>
+                    <div class="field-value" onclick="copyToClipboard('Kadapa', this)">Kadapa</div>
+                </div>
+                <span class="result-badge">✅ Expected: CIV 123/2024, Serial No: 15</span>
+            </div>
+
+            <div class="test-case">
+                <h3>Test 2: Search by Case Number</h3>
+                <div class="field-group">
+                    <span class="field-label">Case Type:</span>
+                    <div class="field-value" onclick="copyToClipboard('CIV', this)">CIV</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Case Number:</span>
+                    <div class="field-value" onclick="copyToClipboard('123', this)">123</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Year:</span>
+                    <div class="field-value" onclick="copyToClipboard('2024', this)">2024</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Court ID:</span>
+                    <div class="field-value" onclick="copyToClipboard('101', this)">101</div>
+                </div>
+                <span class="result-badge">✅ Expected: Same as Test 1</span>
+            </div>
+
+            <div class="test-case">
+                <h3>Test 3: Criminal Case</h3>
+                <div class="field-group">
+                    <span class="field-label">CNR Number:</span>
+                    <div class="field-value" onclick="copyToClipboard('WXYZ9876543210987', this)">WXYZ9876543210987</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Court ID:</span>
+                    <div class="field-value" onclick="copyToClipboard('101', this)">101</div>
+                </div>
+                <span class="result-badge">✅ Expected: CRLP 456/2023, Serial No: 22</span>
+            </div>
+
+            <div class="test-case">
+                <h3>Test 4: High Court Case</h3>
+                <div class="field-group">
+                    <span class="field-label">CNR Number:</span>
+                    <div class="field-value" onclick="copyToClipboard('HCAP1111222233334', this)">HCAP1111222233334</div>
+                </div>
+                <div class="field-group">
+                    <span class="field-label">Court ID:</span>
+                    <div class="field-value" onclick="copyToClipboard('102', this)">102</div>
+                </div>
+                <span class="result-badge">✅ Expected: WP 1001/2024, Serial No: 5</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 All Available CNRs</h2>
+            <div class="cnr-list">
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('ABCD1234567890123', this)" style="cursor: pointer;">ABCD1234567890123</strong>
+                    <small>CIV 123/2024 - Ram Kumar vs Shyam Singh<br>District Court, Serial: 15</small>
+                </div>
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('WXYZ9876543210987', this)" style="cursor: pointer;">WXYZ9876543210987</strong>
+                    <small>CRLP 456/2023 - State vs Mohan Lal<br>District Court, Serial: 22</small>
+                </div>
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('PQRS5555666677778', this)" style="cursor: pointer;">PQRS5555666677778</strong>
+                    <small>CIV 789/2024 - Lakshmi Devi vs Municipal Corp<br>District Court, Serial: 8</small>
+                </div>
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('HCAP1111222233334', this)" style="cursor: pointer;">HCAP1111222233334</strong>
+                    <small>WP 1001/2024 - Vijay Enterprises vs State<br>High Court, Serial: 5</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🏛️ Court IDs</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('101', this)" style="cursor: pointer;">101</strong>
+                    <small>District Court, Kadapa<br>3 cases available</small>
+                </div>
+                <div class="cnr-item">
+                    <strong onclick="copyToClipboard('102', this)" style="cursor: pointer;">102</strong>
+                    <small>High Court, Andhra Pradesh<br>1 case available</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-copy">
+            <h3 style="margin-bottom: 15px;">🚀 Quick Actions</h3>
+            <button onclick="window.open('http://localhost:5000', '_blank')">Open Web App</button>
+            <button onclick="copyToClipboard('ABCD1234567890123')">Copy CNR 1</button>
+            <button onclick="copyToClipboard('WXYZ9876543210987')">Copy CNR 2</button>
+            <button onclick="copyToClipboard('101')">Copy Court 101</button>
+            <button onclick="copyToClipboard('102')">Copy Court 102</button>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip">Copied!</div>
+
+    <script>
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text).then(() => {
+                showTooltip(element || event.target);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        function showTooltip(element) {
+            const tooltip = document.getElementById('tooltip');
+            const rect = element.getBoundingClientRect();
+            
+            tooltip.style.display = 'block';
+            tooltip.style.left = rect.left + (rect.width / 2) - 30 + 'px';
+            tooltip.style.top = rect.top - 40 + 'px';
+            
+            setTimeout(() => {
+                tooltip.style.display = 'none';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

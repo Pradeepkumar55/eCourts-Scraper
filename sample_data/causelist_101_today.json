@@ -1,0 +1,42 @@
+{
+  "court_name": "District Court - Kadapa",
+  "court_id": "101",
+  "date": "2025-10-19",
+  "state": "Andhra Pradesh",
+  "district": "Kadapa",
+  "cases": [
+    {
+      "cnr": "ABCD1234567890123",
+      "case_no": "CIV 123/2024",
+      "case_type": "Civil",
+      "serial_no": "15",
+      "sl_no": "15",
+      "party_names": "Ram Kumar vs Shyam Singh",
+      "advocate": "Adv. Rajesh Sharma",
+      "purpose": "Final Arguments",
+      "pdf_url": "/download/pdf/123"
+    },
+    {
+      "cnr": "WXYZ9876543210987",
+      "case_no": "CRLP 456/2023",
+      "case_type": "Criminal",
+      "serial_no": "22",
+      "sl_no": "22",
+      "party_names": "State vs Mohan Lal",
+      "advocate": "Adv. Priya Verma",
+      "purpose": "Hearing",
+      "pdf_url": "/download/pdf/456"
+    },
+    {
+      "cnr": "PQRS5555666677778",
+      "case_no": "CIV 789/2024",
+      "case_type": "Civil",
+      "serial_no": "8",
+      "sl_no": "8",
+      "party_names": "Lakshmi Devi vs Municipal Corporation",
+      "advocate": "Adv. Suresh Kumar",
+      "purpose": "Evidence",
+      "pdf_url": "/download/pdf/789"
+    }
+  ]
+}

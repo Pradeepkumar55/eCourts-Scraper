@@ -1,0 +1,20 @@
+{
+  "court_name": "High Court - Andhra Pradesh",
+  "court_id": "102",
+  "date": "2025-10-19",
+  "state": "Andhra Pradesh",
+  "district": "Vijayawada",
+  "cases": [
+    {
+      "cnr": "HCAP1111222233334",
+      "case_no": "WP 1001/2024",
+      "case_type": "Writ Petition",
+      "serial_no": "5",
+      "sl_no": "5",
+      "party_names": "Vijay Enterprises vs State of AP",
+      "advocate": "Sr. Adv. Ramesh Babu",
+      "purpose": "Final Hearing",
+      "pdf_url": "http://localhost:5001/pdf/case_1001.pdf"
+    }
+  ]
+}

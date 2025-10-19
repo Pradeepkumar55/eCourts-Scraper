@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Cause List - eCourts Listing Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #667eea; margin-bottom: 10px;">📋 View Full Cause List</h2>
+    <p style="color: #666; margin-bottom: 30px;">Download the complete cause list for a court and date</p>
+
+    <form method="POST" action="/causelist">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="court_id">Court ID <span style="color: red;">*</span></label>
+                <input type="text" id="court_id" name="court_id" placeholder="e.g., 101" required>
+            </div>
+            <div class="form-group">
+                <label for="when">Date</label>
+                <select id="when" name="when">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="both">Both Today & Tomorrow</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="state">State (Optional)</label>
+                <input type="text" id="state" name="state" placeholder="e.g., Andhra Pradesh">
+            </div>
+            <div class="form-group">
+                <label for="district">District (Optional)</label>
+                <input type="text" id="district" name="district" placeholder="e.g., Kadapa">
+            </div>
+        </div>
+
+        <button type="submit" class="btn">📋 Get Cause List</button>
+    </form>
+</div>
+
+<div class="card" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);">
+    <h3 style="color: #667eea; margin-bottom: 15px;">💡 Available Courts for Testing</h3>
+    <ul style="list-style: none; padding-left: 0;">
+        <li style="padding: 10px; background: white; margin-bottom: 10px; border-radius: 8px;">
+            <strong>Court 101</strong> - District Court, Kadapa (3 cases)
+        </li>
+        <li style="padding: 10px; background: white; border-radius: 8px;">
+            <strong>Court 102</strong> - High Court, Andhra Pradesh (1 case)
+        </li>
+    </ul>
+</div>
+{% endblock %}

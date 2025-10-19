@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - eCourts Listing Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #667eea; margin-bottom: 20px;">📊 Search Results</h2>
+
+    <!-- Query Summary -->
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="color: #333; margin-bottom: 10px;">Query Details:</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+            {% if results.query.cnr %}
+            <div><strong>CNR:</strong> {{ results.query.cnr }}</div>
+            {% endif %}
+            {% if results.query.case_no %}
+            <div><strong>Case No:</strong> {{ results.query.case_no }}</div>
+            {% endif %}
+            <div><strong>Court ID:</strong> {{ results.query.court_id }}</div>
+            <div><strong>When:</strong> {{ results.query.when|title }}</div>
+            {% if results.query.state %}
+            <div><strong>State:</strong> {{ results.query.state }}</div>
+            {% endif %}
+            {% if results.query.district %}
+            <div><strong>District:</strong> {{ results.query.district }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if results.found %}
+        <div class="alert alert-success">
+            <strong>✅ Case Found!</strong> Your case is listed on the following date(s):
+        </div>
+
+        {% for listing in results.listings %}
+        <div style="background: white; border: 2px solid #28a745; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                <div>
+                    <h3 style="color: #28a745; margin-bottom: 5px;">
+                        📅 {{ listing.date }}
+                    </h3>
+                    <p style="color: #666; margin: 0;">
+                        <strong>Court:</strong> {{ listing.court_name }}
+                    </p>
+                </div>
+                <div style="background: #28a745; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600;">
+                    Serial No: {{ listing.serial_no or 'N/A' }}
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #333; margin-bottom: 10px;">Case Details:</h4>
+                <table style="width: 100%; border-collapse: collapse;">
+                    {% if listing.case.cnr %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600; width: 150px;">CNR:</td>
+                        <td style="padding: 8px;">{{ listing.case.cnr }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.case_no %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600;">Case Number:</td>
+                        <td style="padding: 8px;">{{ listing.case.case_no }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.case_type %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600;">Case Type:</td>
+                        <td style="padding: 8px;">{{ listing.case.case_type }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.party_names %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600;">Parties:</td>
+                        <td style="padding: 8px;">{{ listing.case.party_names }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.advocate %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600;">Advocate:</td>
+                        <td style="padding: 8px;">{{ listing.case.advocate }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.purpose %}
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 8px; font-weight: 600;">Purpose:</td>
+                        <td style="padding: 8px;">{{ listing.case.purpose }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if listing.case.pdf_url %}
+                    <tr>
+                        <td style="padding: 8px; font-weight: 600;">Document:</td>
+                        <td style="padding: 8px;">
+                            <a href="{{ listing.case.pdf_url }}" download
+                               style="display: inline-block; background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-right: 10px; transition: background 0.3s;">
+                                📄 Download PDF
+                            </a>
+                            <span style="color: #666; font-size: 12px;">
+                                (Contains: CNR, Case Number, Parties, Advocate, Purpose)
+                            </span>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <div class="alert alert-warning">
+            <strong>⚠️ Case Not Found</strong><br>
+            Your case is not listed on the requested date(s). Please check:
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li>The CNR or case details are correct</li>
+                <li>The court ID is correct</li>
+                <li>Try checking for a different date</li>
+            </ul>
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 30px; display: flex; gap: 15px;">
+        <a href="/" class="btn" style="text-decoration: none; text-align: center; display: block;">
+            🔍 New Search
+        </a>
+        <a href="/causelist" class="btn btn-secondary" style="text-decoration: none; text-align: center; display: block;">
+            📋 View Full Cause List
+        </a>
+    </div>
+</div>
+{% endblock %}

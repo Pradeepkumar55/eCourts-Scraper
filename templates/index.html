@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Search Case - eCourts Listing Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #667eea; margin-bottom: 10px;">🔍 Search Case Listing</h2>
+    <p style="color: #666; margin-bottom: 30px;">Check if your case is listed today or tomorrow</p>
+
+    <form method="POST" action="/search">
+        <div class="alert alert-info">
+            <strong>💡 Tip:</strong> You can search by CNR <strong>OR</strong> by Case Type/Number/Year
+        </div>
+
+        <!-- CNR Search -->
+        <div class="form-group">
+            <label for="cnr">CNR Number (Case Number Reference)</label>
+            <input type="text" id="cnr" name="cnr" placeholder="e.g., ABCD1234567890123">
+            <small style="color: #666; display: block; margin-top: 5px;">
+                Leave blank if searching by Case Type/Number/Year
+            </small>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0; color: #999; font-weight: 600;">
+            — OR —
+        </div>
+
+        <!-- Case Type/Number/Year Search -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="case_type">Case Type</label>
+                <input type="text" id="case_type" name="case_type" placeholder="e.g., CIV, CRLP, WP">
+            </div>
+            <div class="form-group">
+                <label for="case_number">Case Number</label>
+                <input type="text" id="case_number" name="case_number" placeholder="e.g., 123">
+            </div>
+            <div class="form-group">
+                <label for="case_year">Year</label>
+                <input type="text" id="case_year" name="case_year" placeholder="e.g., 2024">
+            </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #e0e0e0;">
+
+        <!-- Court Details -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="court_id">Court ID <span style="color: red;">*</span></label>
+                <input type="text" id="court_id" name="court_id" placeholder="e.g., 101" required>
+            </div>
+            <div class="form-group">
+                <label for="when">When to Check</label>
+                <select id="when" name="when">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="both">Both Today & Tomorrow</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="state">State (Optional)</label>
+                <input type="text" id="state" name="state" placeholder="e.g., Andhra Pradesh">
+            </div>
+            <div class="form-group">
+                <label for="district">District (Optional)</label>
+                <input type="text" id="district" name="district" placeholder="e.g., Kadapa">
+            </div>
+        </div>
+
+        <button type="submit" class="btn">🔍 Search Case Listing</button>
+    </form>
+</div>
+
+<!-- Sample Cases Card -->
+<div class="card" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);">
+    <h3 style="color: #667eea; margin-bottom: 15px;">📝 Sample Cases for Testing</h3>
+    
+    <div style="margin-bottom: 20px;">
+        <h4 style="color: #333; margin-bottom: 10px;">Court 101 - District Court Kadapa</h4>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="padding: 8px 0; border-bottom: 1px solid #e0e0e0;">
+                <strong>CNR:</strong> <code style="background: #f5f5f5; padding: 2px 8px; border-radius: 4px;">ABCD1234567890123</code> 
+                → CIV 123/2024 (Ram Kumar vs Shyam Singh)
+            </li>
+            <li style="padding: 8px 0; border-bottom: 1px solid #e0e0e0;">
+                <strong>CNR:</strong> <code style="background: #f5f5f5; padding: 2px 8px; border-radius: 4px;">WXYZ9876543210987</code> 
+                → CRLP 456/2023 (State vs Mohan Lal)
+            </li>
+            <li style="padding: 8px 0;">
+                <strong>CNR:</strong> <code style="background: #f5f5f5; padding: 2px 8px; border-radius: 4px;">PQRS5555666677778</code> 
+                → CIV 789/2024 (Lakshmi Devi vs Municipal Corporation)
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h4 style="color: #333; margin-bottom: 10px;">Court 102 - High Court Andhra Pradesh</h4>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="padding: 8px 0;">
+                <strong>CNR:</strong> <code style="background: #f5f5f5; padding: 2px 8px; border-radius: 4px;">HCAP1111222233334</code> 
+                → WP 1001/2024 (Vijay Enterprises vs State of AP)
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Clear case type/number/year when CNR is entered
+    document.getElementById('cnr').addEventListener('input', function() {
+        if (this.value.trim()) {
+            document.getElementById('case_type').value = '';
+            document.getElementById('case_number').value = '';
+            document.getElementById('case_year').value = '';
+        }
+    });
+
+    // Clear CNR when case details are entered
+    ['case_type', 'case_number', 'case_year'].forEach(id => {
+        document.getElementById(id).addEventListener('input', function() {
+            if (this.value.trim()) {
+                document.getElementById('cnr').value = '';
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}About - eCourts Listing Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #667eea; margin-bottom: 20px;">ℹ️ About eCourts Listing Checker</h2>
+
+    <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h3 style="color: #667eea; margin-bottom: 10px;">Current Mode:</h3>
+        {% if offline_mode %}
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="badge badge-offline">OFFLINE MODE</span>
+            <span style="color: #666;">Using sample data from local files</span>
+        </div>
+        {% else %}
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="badge badge-online">ONLINE MODE</span>
+            <span style="color: #666;">Connected to API</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">✨ Features</h3>
+    <ul style="list-style: none; padding-left: 0;">
+        <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+            <strong>🔍 Case Search:</strong> Search by CNR or Case Type/Number/Year
+        </li>
+        <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+            <strong>📅 Date Options:</strong> Check listings for today, tomorrow, or both
+        </li>
+        <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+            <strong>📋 Cause List:</strong> View complete cause list for any court
+        </li>
+        <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+            <strong>🔌 API Access:</strong> JSON API endpoint for programmatic access
+        </li>
+        <li style="padding: 10px 0;">
+            <strong>💾 Offline Mode:</strong> Test with sample data without API connection
+        </li>
+    </ul>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">🛠️ Technology Stack</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 5px;">🐍</div>
+            <strong>Python</strong>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 5px;">🌶️</div>
+            <strong>Flask</strong>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 5px;">🎨</div>
+            <strong>HTML/CSS</strong>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 5px;">📡</div>
+            <strong>REST API</strong>
+        </div>
+    </div>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">📖 API Endpoints</h3>
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 14px;">
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #667eea;">GET/POST</strong> /api/search
+            <div style="color: #666; margin-top: 5px;">Search for a case listing</div>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #667eea;">GET</strong> /api/health
+            <div style="color: #666; margin-top: 5px;">Check API health status</div>
+        </div>
+    </div>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">📝 Example API Request</h3>
+    <div style="background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 13px; overflow-x: auto;">
+<pre style="margin: 0;">curl -X POST http://localhost:5000/api/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "cnr": "ABCD1234567890123",
+    "when": "today",
+    "court_id": "101"
+  }'</pre>
+    </div>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">⚠️ Important Notes</h3>
+    <div class="alert alert-warning">
+        <ul style="margin: 10px 0 0 20px;">
+            <li>This is a student project for educational purposes</li>
+            <li>Sample data is used in offline mode for testing</li>
+            <li>Do not use this for actual legal proceedings without verification</li>
+            <li>Always verify case information through official channels</li>
+        </ul>
+    </div>
+
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">📂 Project Structure</h3>
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 13px;">
+<pre style="margin: 0;">ecourt/
+├── web_app.py          # Web application
+├── src/
+│   ├── cli.py         # Command-line interface
+│   ├── ecourts_api.py # API wrapper
+│   ├── config.py      # Configuration
+│   └── utils.py       # Utilities
+├── templates/         # HTML templates
+├── sample_data/       # Sample JSON files
+└── outputs/           # Query results</pre>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="/" class="btn" style="text-decoration: none; display: inline-block; max-width: 300px;">
+            🔍 Start Searching
+        </a>
+    </div>
+</div>
+{% endblock %}
